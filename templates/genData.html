@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+
+    <title>Add new Project</title>
+
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <script src="../static/js/scripts.js"></script>
+</head>
+ 
+<body>
+    <div class="container">
+        <!--navbar-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Real Estate Appraiser</h3>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="logout">Logout</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="wishlist">Generate AI Data</a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
+
+        <section>
+            <div class="jumbotron">
+            <form class="form-horizontal" method="post" action="/addGen" enctype="multipart/form-data">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Generate Data</legend>
+ 
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPost">Lets Gen it </label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="inputDescription" placeholder="Description" dir="rtl"></textarea>
+                        </div>
+                    </div>
+ 
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="gen-result" placeholder={{error}} dir="rtl">{{error}}</textarea>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <h2>Load Data</h2>
+                <dl>
+                    <p>
+                        <input type="file" id="fileInput" name="files[]" multiple="true" autocomplete="off">
+                    </p>
+                </dl>
+                <button type="button" class="btn btn-lg btn-primary btn-block" id="readButton">Read File Content</button>
+            </form>
+            </div>
+        </section>
+        </div>
+ </body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const readButton = document.getElementById('readButton');
+    console.log("Button clicked1");
+    readButton.addEventListener('click', readFileContent);
+});
+
+function readFileContent() {
+    console.log("Button clicked2");
+    const input = document.getElementById('fileInput');
+    if (!input) {
+        console.error("File input element not found");
+        return;
+    }
+
+    const files = input.files;
+    if (files.length === 0) {
+        console.log("No files selected");
+        console.debug("No files selected");
+        return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+        console.log(`File Name: ${files[i].name}`);
+        console.log(`File Size: ${files[i].size} bytes`);
+        console.log(`File Type: ${files[i].type}`);
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            console.log(`Content of ${file.name}:`);
+            console.log(event.target.result);
+        };
+
+        reader.readAsText(file);
+    }
+}
+</script>

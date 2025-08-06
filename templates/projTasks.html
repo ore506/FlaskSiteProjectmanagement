@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+
+    <title>Project Tasks</title>
+
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="../static/css/jumbotron-narrow.css" rel="stylesheet"></script>
+    <script src="../static/js/jquery-3.2.1.js"></script>
+
+</head>
+<script>
+    $(function() {
+        const date = new Date();
+        console.log('Test Date:');
+        console.log(date);
+        $.ajax({
+            url: '/getTask',
+            type: 'GET',
+            success: function(res) {
+                var div = $('<div>')
+                .attr('class', 'list-group')
+                .append($('<a href="/getProjTask/2">')
+                    .attr('class', 'list-group-item active')
+                    .append($('<h4>')
+                        .attr('class', 'list-group-item-heading'),
+                        $('<p>'),
+                        $('<p1>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p2>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p3>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p4>')
+                        .attr('class', 'list-group-item-text')
+                        ));
+                var wishObj = JSON.parse(res);
+				var wish = '';
+				
+				$.each(wishObj,function(index, value){
+					wish = $(div).clone();
+					$(wish).find('h4').text(value.Task_Def_Id);
+					$(wish).find('p1').text(value.Task_Def_Name);
+                    $(wish).find('p2').text(value.Task_Def_Description);
+                    $(wish).find('p3').text(value.Task_Def_SLA);
+                    $(wish).find('h4').text(value.Task_Id);
+					$(wish).find('p1').text(value.Task_Name);
+                    $(wish).find('p2').text(value.Task_Description);
+                    if (value.Task_Passed_Due=='TRUE'){
+                        $(wish).find('p4').text("Passed Due Date -"+ "Task Creation Date"+ value.Task_Creation_Date);
+                        $(wish).find('p4').attr('class', 'list-group-item list-group-item-danger');}
+                    else{
+                        $(wish).find('p4').text("Not Passed Due Date -"+ "Task Creation Date"+ value.Task_Creation_Date);
+                        $(wish).find('p4').attr('class', 'list-group-item list-group-item-success');}
+                    if (value.Task_Done=='on'){
+                        $(wish).find('p4').text("Task is Done -"+ "Task Creation Date"+ value.Task_Creation_Date);
+                        $(wish).find('p4').attr('class', 'list-group-item list-group-item-dark');}
+                    
+                    if (value.Task_Def_Id)
+                        $(wish).find('a').attr("href",'/createTask/'+value.Task_Def_Id+'/'+value.Task_Proj);
+                    else
+                        if (value.Task_Description)
+                            $(wish).find('a').attr("href",'/displayTask/'+value.Task_Proj+'/'+value.Task_Id+'/'+value.Task_Name+'/'+value.Task_Description);
+                        else
+                            $(wish).find('a').attr("href",'/displayTask/'+value.Task_Proj+'/'+value.Task_Id);
+					$('.jumbotron').append(wish);
+                        });
+                    },
+                        error: function(error) {
+                            console.log(error);
+                    }
+        });
+    });
+</script>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Project Tasks Managment-Real Estate Appraiser</h3>
+            <span class="navbar-text">Logged in as {{username}}</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="/userHome">Project List</a>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron">
+            <h1>Welcome To Task Managment {{username}}!</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">Task Def Id</h4>
+                    <p class="list-group-item-text">Task Def Name</p>
+                    <p class="list-group-item-text">Task Def Description</p>
+                    <p class="list-group-item-text">Task Def SLA</p>
+                </a>
+            </div>
+        </div>
+
+        <footer class="footer">       
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>

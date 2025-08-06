@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+
+    <title>Real Estate Appraiser</title>
+
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+    <script src="../static/js/jquery-3.2.1.js"></script>
+
+</head>
+<script>
+    $(function() {
+        $.ajax({
+            url: '/getWish',
+            type: 'GET',
+            success: function(res) {
+                var div = $('<div>')
+                .attr('class', 'list-group')
+                .append($('<a href="getProjTask/1">')
+                    .attr('class', 'list-group-item active')
+                    .append($('<h4 style="text-align:center">')
+                        .attr('class', 'list-group-item-heading'),
+                        $('<p style="text-align:center">'),
+                        $('<p1>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p2>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p3>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p4>')
+                        .attr('class', 'list-group-item-text'),
+                        $('<p>'),
+                        $('<p5>')
+                        .attr('class', 'list-group-item-text')
+                        ));
+                var wishObj = JSON.parse(res);
+				var wish = '';
+                var selectedProj = '';
+				
+				$.each(wishObj,function(index, value){
+					wish = $(div).clone();
+					$(wish).find('h4').text(value.Project_Name);
+					$(wish).find('p1').text(value.Id);
+                    $(wish).find('p2').text(value.Project_Description);
+                    $(wish).find('p3').text(value.Project_User);
+                    $(wish).find('p4').text(value.Project_Date);
+                    $(wish).find('a').attr("href",'getProjTask/'+value.Id);
+					$('.jumbotron').append(wish);
+                        });
+                    },
+                        error: function(error) {
+                            (error);
+                    }
+        });
+    });
+</script>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Real Estate Appraiser</h3>
+            <span class="navbar-text">Logged in as {{username}}</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="logout">Logout</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="wishlist">New Project</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="genData">Gen Data</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="nadData">Gush Helka Nadlan</a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron">
+            <h1>Welcome Home {{username}}!</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading" style="text-align:center">Project Name</h4>
+                    <p class="list-group-item-text" style="text-align:center">Project ID</p>
+                    <p class="list-group-item-text" style="text-align:center">Project Description</p>
+                    <p class="list-group-item-text" style="text-align:center">Project User</p>
+                    <p class="list-group-item-text" style="text-align:center">Project Date</p>
+                </a>
+            </div>
+        </div>
+
+        <footer class="footer">       
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+
+    <title>Real estate appraiser-Add new Task</title>
+
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link src="../static/css/datepicker.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/locales/bootstrap-datepicker.he.js" charset="UTF-8"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+    <!-- Datepicker -->
+    <link href='bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+    <script src='bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+
+</head>
+ 
+<body>
+    <div class="container">
+        <!--navbar-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <h3 class="navbar-brand">Real Estate Appraiser-App</h3>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  <li class="navbar-nav mr-auto">
+                    <a class="nav-link" href="/userHome">Task List</a>
+                  </li>
+                </ul>
+            </div>
+        </nav>
+
+        <section>
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </p>
+            <div class="jumbotron">
+            <form class="form-horizontal" method="post" action="/addNad" enctype="multipart/form-data">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Nad data</legend>
+ 
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPost">input Gush</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="inputGush" placeholder={{inputGush}} dir="rtl"></textarea>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtPost">input Halka</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="txtPost" name="inputHalka" placeholder={{inputHalka}} dir="rtl"></textarea>
+                        </div>
+                    </div>
+
+    
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit" value="Publish" />
+                        </div>
+                    </div>
+ 
+                </fieldset>
+            </form>
+            </div>
+        </section>
+        </div>
+        
+         <div class="table-responsive col-md-10">
+        <table class="table table-bordered table-striped table-hover table-condensed text-center" id="DyanmicTable">
+            <thead>
+                <tr>
+                    <th class="text-center">Deal ID</th>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Details</th>
+                    <th class="text-center">Type</th>
+                    <th class="text-center">Rooms</th>
+                    <th class="text-center">Floor</th>
+                    <th class="text-center">Change</th>
+                    <th class="text-center">
+                        <button id="addNewRow" class="btn btn-primary btn-sm">Add New Row</button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in scraped_results %}
+                <tr>
+                    <td>{{ result[0] }}</td>
+                    <td>{{ result[1] }}</td>
+                    <td>{{ result[2] }}</td>
+                    <td>{{ result[3] }}</td>
+                    <td>{{ result[4] }}</td>
+                    <td>{{ result[5] }}</td>
+                    <td>{{ result[6] }}</td>
+                    <td>{{ result[7] }}</td>
+                    <td>{{ result[8] }}</td>
+                    <td>{{ result[9] }}</td>
+                    <td></td> {# Add an empty cell for the "Add New Row" column, or specific actions #}
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No data to display.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+            <!--JS Files-->
+<script  src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+<script src="/static/js/bootstable.min.js"></script>
+<script>
+ $('#DyanmicTable').SetEditable({ $addButton: $('#addNewRow')});
+</script>
+<script>$('#datepicker').datepicker('show');</script>
+
+<div class='container' style='margin-top: 100px;'>
+    <input type='text' class="form-control" id='datepicker' style='width: 300px;' > <br>
+    <input type='text' class="form-control" data-provide="datepicker" style='width: 300px;' >
+</div>
+   
+   <!-- Script -->
+<script type="text/javascript">
+   $(document).ready(function(){
+    $('#datepicker').datepicker(); 
+   });
+</script>
+
+ </body>
+</html>
