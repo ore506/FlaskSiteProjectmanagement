@@ -1,0 +1,181 @@
+
+python -m venv myenv
+.\myenv\Scripts\activate
+
+pip install requests
+pip install -r requierments.txt     
+python -c "import requests; print(requests.__version__)"
+
+$env: OPENAI_API_KEY="YOUR_CORRECT_API_KEY"
+
+
+$env:FLASK_APP="application"
+flask run
+
+
+
+------------------------------
+ pip install Flask
+pip install -U googlemaps  
+
+
+
+flask run --port=3000 --host=127.0.0.2
+
+
+                <!--   $(wish).find('p5').text('a href="getProjTask/'+value.value.Id+'"');-->
+
+pip freeze >requierments.txt
+
+
+https://stackoverflow.com/questions/8921188/issue-with-virtualenv-cannot-activate
+
+pip3 install -U pip virtualenv
+Step 2
+
+virtualenv --system-site-packages -p python ./venv
+or
+
+virtualenv --system-site-packages -p python3 ./venv
+Step 3
+
+.\venv\Scripts\activate
+
+(flask) C:\Users\ORENAH\OneDrive - AMDOCS\Backup Folders\Desktop\t\Python-Webapp-master\flask\Scripts>activate.bat
+
+(flask) C:\Users\ORENAH\OneDrive - AMDOCS\Backup Folders\Desktop\t\Python-Webapp-master\flask\Scripts>pip install flask
+Collecting flask
+
+*************************************************************
+Restart virtual environment
+
+$ virtualenv flask
+Into dir flask run
+
+$source ./bin/activate
+Install python module again
+
+$pip install "module"
+
+*************************************************
+
+This is my import statement:
+from flask import Flask, render_template, redirect, url_for, request
+whats wrong?????
+
+Fixed
+uninstalled flask by pip uninstall flask
+then i removed flask from packages
+uninstalled werkzeug using pip
+installed it again using pi
+                
+
+
+#install pip in spesific Python version
+
+py -3.8-64 -m pip install flask
+
+
+------------AWS Set Up-----------
+EC2  for flask
+create ec2 
+Ubuntu Server 18.04 LTS (HVM), SSD Volume Type - ami-0e472ba40eb589f49 (64-bit x86) / ami-0a940cb939351ccca (64-bit Arm)
+
+sudo apt-get update
+sudo apt-get install -y python3-pip
+pip3 install -U pip virtualenv
+pip3 install -U pip flask
+sudo apt install virtualenv
+sudo apt install python-pip
+pip install flask
+
+
+sudo apt install python3-flask
+sudo apt install gunicorn
+sudo apt install nginx
+sudo apt install git
+sudo apt install nano
+
+download putty ( select the PKK)
+https://www.chiark.greenend.org.uk/~sgtatham/putty/
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html
+
+
+open file zilla ( with AWS details & private generated file )
+{
+  1) ceate new site
+  2) protocol: SFTP
+  3) Host:
+  4) Key file
+  5) User: ubuntu
+  6) keyfile: pkk file generated 
+}
+and copy all the project to the Folder
+
+
+pip freeze >requierments.txt
+virtualenv flask
+
+$source ./bin/activate
+Install python module again
+
+$pip install "module"
+
+------
+set FLASK_APP=application.py
+export FLASK_APP=application.py
+set UPLOAD_FOLDER=/home
+export UPLOAD_FOLDER=/home
+flask run
+
+  D:\Development\Projects\Python_Projects\flask_blog>set FLASK_APP=application.py
+   D:\Development\Projects\Python_Projects\flask_blog>$env: FLASK_APP = "application.py"
+   D:\Development\Projects\Python_Projects\flask_blog>python -m  flask run
+
+sudo apt install rpm
+sudo apt install yum
+echo $PATH
+Installing Python 3.8 on Ubuntu with Apt
+Installing Python 3.8 on Ubuntu with apt is a relatively straightforward process and takes only a few minutes:
+Run the following commands as root or user with sudo access to update the packages list and install the prerequisites:
+
+sudo apt update
+sudo apt install software-properties-common
+CopyCopy
+Add the deadsnakes PPA to your system’s sources list:
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+Copy
+When prompted press Enter to continue:
+
+Press [ENTER] to continue or Ctrl-c to cancel adding it.Copy
+Once the repository is enabled, install Python 3.8 with:
+
+sudo apt install python3.8
+Copy
+Verify that the installation was successful by typing:
+
+python3.8 --version
+Copy
+Python 3.8.0
+
+python -V
+
+------------------------------- switch python version---------------
+https://tecadmin.net/how-to-switch-python-version-in-ubuntu-debian/
+------------------------------------
+sudo apt install python3-flask
+
+
+(Need to add inboud rule for EC2 to accept TCP  port 5000 for 0.0.0.0/0)
+
+ flask run --host 0.0.0.0 --port 5000
+
+curl 0.0.0.0:80
+
+sudo service nginx stop
+
+
+https://medium.com/featurepreneur/deploy-your-flask-app-to-amazon-ec2-56e2f2a14021
+
+https://www.twilio.com/blog/deploy-flask-python-app-aws
