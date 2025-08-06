@@ -51,12 +51,12 @@ application.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 # you can set key as config
-application.config['GOOGLEMAPS_KEY'] = "AIzaSyDbsmr0HAnaDppyq7o1FOqrzNM9D1pbBCE"
+application.config['GOOGLEMAPS_KEY'] = "#####"
 
 # Initialize the extension
 GoogleMaps(application)
 
-#GoogleMaps1(application, key="8JZ7i18MjFuM35dJHq70n3Hx4")
+#GoogleMaps1(application, key="#####")
 
 
 #helper function
